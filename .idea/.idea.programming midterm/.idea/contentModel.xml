@@ -6,15 +6,17 @@
       <e p="Assets" t="Include">
         <e p="extension.cs" t="Include" />
         <e p="Scripts" t="Include">
-          <e p="game state machine" t="Include">
+          <e p="game state machine &amp; singleton" t="Include">
+            <e p="createSingleton.cs" t="Include" />
             <e p="gameState.cs" t="Include" />
             <e p="gameStateManager.cs" t="Include" />
+            <e p="managerSingleton.cs" t="Include" />
+            <e p="singleton.cs" t="Include" />
             <e p="stateBoard.cs" t="Include" />
             <e p="stateEnd.cs" t="Include" />
             <e p="stateGame1.cs" t="Include" />
             <e p="stateStart.cs" t="Include" />
           </e>
-          <e p="singleton.cs" t="Include" />
         </e>
       </e>
       <e p="Library" t="ExcludeRecursive" />

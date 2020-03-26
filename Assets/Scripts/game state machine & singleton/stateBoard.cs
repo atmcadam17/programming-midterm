@@ -15,7 +15,12 @@ public class stateBoard : State
 
     public override void Run()
     {
-  
+        
+    }
+
+    public override void Collisions()
+    {
+        
     }
 
     public override void Controls()

@@ -4,10 +4,12 @@ using UnityEngine;
 
 
 /* Monobehaviour manager class for state machine. */
-public class gameStateManager : MonoBehaviour
+public class gameStateManager : Singleton<gameStateManager>
 {
+    private string name = "state manager singleton";
+    
     private State currentState;
-
+    
     void Start()
     {
         ChangeState(new stateStart(this)); // Set initial state.
@@ -17,6 +19,11 @@ public class gameStateManager : MonoBehaviour
     {
         currentState.Run();
         currentState.Controls();
+    }
+
+    private void OnCollisionEnter(Collision other)
+    {
+        currentState.Collisions();
     }
 
     // Change state.

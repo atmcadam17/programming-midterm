@@ -12,6 +12,7 @@ public abstract class State
     public virtual void Enter() { } // Virtual so can be overriden in derived classes.
     public virtual void Leave() { }
     public virtual void Controls() {}
+    public virtual void Collisions(){}
 
     public State(gameStateManager theManager) // Constructor that takes an argument.
     {
