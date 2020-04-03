@@ -7,7 +7,6 @@ using UnityEngine;
 public class gameStateManager : Singleton<gameStateManager>
 {
     private string name = "state manager singleton";
-    
     private State currentState;
     
     void Start()
@@ -32,5 +31,6 @@ public class gameStateManager : Singleton<gameStateManager>
         if (currentState != null) currentState.Leave();
         currentState = newState;
         currentState.Enter();
+        Debug.Log("entering " + currentState);
     }
 }
