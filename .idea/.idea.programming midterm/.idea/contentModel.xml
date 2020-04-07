@@ -5,12 +5,10 @@
       <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
       <e p="Assets" t="Include">
         <e p="Scripts" t="Include">
+          <e p="createSingleton.cs" t="Include" />
           <e p="game state machine &amp; singleton" t="Include">
-            <e p="createSingleton.cs" t="Include" />
             <e p="gameState.cs" t="Include" />
             <e p="gameStateManager.cs" t="Include" />
-            <e p="managerSingleton.cs" t="Include" />
-            <e p="singleton.cs" t="Include" />
             <e p="stateBoard.cs" t="Include" />
             <e p="stateEnd.cs" t="Include" />
             <e p="stateGame1.cs" t="Include" />
@@ -24,6 +22,12 @@
             <e p="stateGame9.cs" t="Include" />
             <e p="stateStart.cs" t="Include" />
           </e>
+          <e p="managerSingleton.cs" t="Include" />
+          <e p="minigameFinishLine.cs" t="Include" />
+          <e p="rerouteGame.cs" t="Include" />
+          <e p="score list class.cs" t="Include" />
+          <e p="scoreKeeper.cs" t="Include" />
+          <e p="singleton.cs" t="Include" />
           <e p="squareHolder.cs" t="Include" />
           <e p="turnText.cs" t="Include" />
         </e>

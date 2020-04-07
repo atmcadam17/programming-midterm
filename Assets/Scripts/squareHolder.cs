@@ -21,15 +21,18 @@ public class squareHolder : MonoBehaviour
     void Start()
     {
         // get lists of won tiles
-        managerSingleton.Instance.player1tiles = player1tiles;
-        managerSingleton.Instance.player2tiles = player2tiles;
+        scoreKeeper.Instance._p1list.tiles = player1tiles;
+        scoreKeeper.Instance._p2list.tiles = player2tiles;
 
         // set those tiles to each player's color
         if (player1tiles != null)
         {
             foreach (var p1tile in player1tiles)
             {
-                squares[p1tile].gameObject.GetComponent<SpriteRenderer>().color = player1Color;
+                if (p1tile != 0)
+                {
+                    squares[p1tile].gameObject.GetComponent<SpriteRenderer>().color = player1Color;
+                }
             }
         }
 
@@ -37,7 +40,10 @@ public class squareHolder : MonoBehaviour
         {
             foreach (var p2tile in player2tiles)
             {
-                squares[p2tile].gameObject.GetComponent<SpriteRenderer>().color = player1Color;
+                if (p2tile != 0)
+                {
+                    squares[p2tile].gameObject.GetComponent<SpriteRenderer>().color = player1Color;
+                }
             }
         }
     }

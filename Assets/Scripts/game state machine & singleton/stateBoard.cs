@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 
 /* This state class is derived from State.
@@ -14,7 +15,7 @@ public class stateBoard : State
 
     private GameObject squareHolder;
 
-    private float enterTimer = 1.6f;
+    private float enterTimer = .4f;
         
     public stateBoard(gameStateManager theManager) : base(theManager) // Derived class constructor calls base class constructor.
     {
@@ -23,6 +24,13 @@ public class stateBoard : State
 
     public override void Run()
     {
+        // initialize tiles in list!
+        if (managerSingleton.Instance.tiles == null && SceneManager.GetActiveScene().name == "board")
+        {
+            managerSingleton.Instance.tiles = GameObject.Find("squareHolder").GetComponent<squareHolder>().squares;
+            Debug.Log("board tiles found");
+        }
+        
         if (enterTimer > 0)
         {
             enterTimer -= Time.deltaTime;
@@ -31,8 +39,11 @@ public class stateBoard : State
         {
             squareHolder = GameObject.Find("squareHolder");
         }
-        
-        managerSingleton.Instance.tiles[selectedTile].gameObject.GetComponent<SpriteRenderer>().color = highlightColor;
+
+        if (managerSingleton.Instance.tiles != null)
+        {
+            managerSingleton.Instance.tiles[selectedTile].gameObject.GetComponent<SpriteRenderer>().color = highlightColor;
+        }
     }
 
     public override void Controls()
@@ -73,7 +84,7 @@ public class stateBoard : State
             }
             
             // SELECT GAME
-            if (Input.GetKeyDown(KeyCode.Space) && squareHolder != null)
+            if (Input.GetKeyDown(KeyCode.Return) && squareHolder != null)
             {
                 squareHolder.SendMessage("selectGame", selectedTile);
             }
@@ -115,11 +126,17 @@ public class stateBoard : State
             }
             
             // SELECT GAME
-            if (Input.GetKeyDown(KeyCode.Return))
+            if (Input.GetKeyDown(KeyCode.Space))
             {
                 squareHolder.SendMessage("selectGame", selectedTile);
             }
         }
+    }
+
+    public override void Leave()
+    {
+        managerSingleton.Instance.tiles = null;
+        selectedTile = 1;
     }
 
     public bool checkTileRange(int num)

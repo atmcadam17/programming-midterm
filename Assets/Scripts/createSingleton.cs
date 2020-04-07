@@ -9,6 +9,7 @@ public class createSingleton : MonoBehaviour
     {
         Debug.Log(managerSingleton.Instance.name);
         Debug.Log(gameStateManager.Instance.name);
+        Debug.Log(scoreKeeper.Instance.name);
     }
 
     private void Update()

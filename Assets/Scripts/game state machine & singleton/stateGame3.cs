@@ -15,6 +15,12 @@ public class stateGame3 : State
 
     public override void Run()
     {
-  
+        // REROUTE TO SCENE 1 (TEMPORARY)
+        gameStateManager.Instance.ChangeState(new stateGame1(gameStateManager.Instance));
+    }
+    
+    public override void Leave()
+    {
+        managerSingleton.Instance.currentSquare = 0;
     }
 }
