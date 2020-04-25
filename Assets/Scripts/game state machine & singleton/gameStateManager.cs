@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 
@@ -15,7 +16,10 @@ public class gameStateManager : Singleton<gameStateManager>
     public float instructionTime;
     public GameObject textObject;
     public bool gameStart = false;
-    
+   
+    public bool p1touchingWall = false;
+    public bool p2touchingWall = false;
+
     void Start()
     {
         gameObject.name = "state manager";
@@ -61,9 +65,17 @@ public class gameStateManager : Singleton<gameStateManager>
             textObject.GetComponent<Text>().text = "START";
 
             gameStart = true;
-            
             yield return new WaitForSeconds(1);
-            textObject.GetComponent<Text>().text = "";
+            
+            if (gameStart && SceneManager.GetActiveScene().name != "board")
+            {
+                textObject.GetComponent<Text>().text = "";
+            }
+            else
+            {
+                resetMinigameIntro();
+            }
+            
             yield return null;
         }
         else

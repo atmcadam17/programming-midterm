@@ -15,10 +15,15 @@ public class managerSingleton : Singleton<managerSingleton>
     public bool gameOver = false;
     public bool p1Win = false;
     public bool p2Win = false;
+
+    public Color32 p1Color;
+    public Color32 p2Color;
     
     void Start()
     {
         gameObject.name = "manager";
+        p1Color = new Color32(255, 136, 136, 255);
+        p2Color = new Color32(120, 229, 220, 255);
     }
 
     void Update()
@@ -94,9 +99,40 @@ public class managerSingleton : Singleton<managerSingleton>
 
     public void addPlayer1Tile()
     {
-        if (currentSquare >= 1 && currentSquare <= 9 && scoreKeeper.Instance._p1list.tiles != null)
+        Debug.Log("p1 win");
+        
+        if (currentSquare >= 1 && currentSquare <= 9)
         {
-            scoreKeeper.Instance._p1list.tiles.Add(currentSquare);
+            switch (currentSquare)
+            {
+                case 1:
+                    scoreKeeper.Instance.one = 1;
+                    break;
+                case 2:
+                    scoreKeeper.Instance.two = 1;
+                    break;
+                case 3:
+                    scoreKeeper.Instance.three = 1;
+                    break;
+                case 4:
+                    scoreKeeper.Instance.four = 1;
+                    break;
+                case 5:
+                    scoreKeeper.Instance.five = 1;
+                    break;
+                case 6:
+                    scoreKeeper.Instance.six = 1;
+                    break;
+                case 7:
+                    scoreKeeper.Instance.seven = 1;
+                    break;
+                case 8:
+                    scoreKeeper.Instance.eight = 1;
+                    break;
+                case 9:
+                    scoreKeeper.Instance.nine = 1;
+                    break;
+            }
         
             currentSquare = 0;
             Debug.Log("tile added");
@@ -109,9 +145,40 @@ public class managerSingleton : Singleton<managerSingleton>
     
     public void addPlayer2Tile()
     {
-        if (currentSquare >= 1 && currentSquare <= 9 && scoreKeeper.Instance._p2list.tiles != null)
+        Debug.Log("p2 win");
+        
+        if (currentSquare >= 1 && currentSquare <= 9)
         {
-            scoreKeeper.Instance._p2list.tiles.Add(currentSquare);
+            switch (currentSquare)
+            {
+                case 1:
+                    scoreKeeper.Instance.one = 2;
+                    break;
+                case 2:
+                    scoreKeeper.Instance.two = 2;
+                    break;
+                case 3:
+                    scoreKeeper.Instance.three = 2;
+                    break;
+                case 4:
+                    scoreKeeper.Instance.four = 2;
+                    break;
+                case 5:
+                    scoreKeeper.Instance.five = 2;
+                    break;
+                case 6:
+                    scoreKeeper.Instance.six = 2;
+                    break;
+                case 7:
+                    scoreKeeper.Instance.seven = 2;
+                    break;
+                case 8:
+                    scoreKeeper.Instance.eight = 2;
+                    break;
+                case 9:
+                    scoreKeeper.Instance.nine = 2;
+                    break;
+            }
             
             currentSquare = 0;
             Debug.Log("tile added");

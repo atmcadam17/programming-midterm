@@ -8,6 +8,8 @@ TagManager:
   - P2
   - Text
   - Win
+  - Wall
+  - KILL
   layers:
   - Default
   - TransparentFX

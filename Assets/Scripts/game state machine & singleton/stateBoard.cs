@@ -10,16 +10,23 @@ public class stateBoard : State
 {
     private int playerTurn = managerSingleton.Instance.PlayerTurn;
     private int selectedTile = 1;
-    
-    private Color highlightColor = new Color(253, 171, 159, .5f);
+
+    private Color32 highlightColor;
 
     private GameObject squareHolder;
 
     private float enterTimer = .4f;
+    
+    private Color prevColor = Color.white;
         
     public stateBoard(gameStateManager theManager) : base(theManager) // Derived class constructor calls base class constructor.
     {
 
+    }
+
+    public override void Enter()
+    {
+        highlightColor = new Color32(237, 117, 47, 120);
     }
 
     public override void Run()
@@ -40,8 +47,9 @@ public class stateBoard : State
             squareHolder = GameObject.Find("squareHolder");
         }
 
-        if (managerSingleton.Instance.tiles != null)
+        if (managerSingleton.Instance.tiles != null && scoreKeeper.Instance != null)
         {
+            scoreKeeper.Instance.paintTiles();
             managerSingleton.Instance.tiles[selectedTile].gameObject.GetComponent<SpriteRenderer>().color = highlightColor;
         }
     }
@@ -55,15 +63,19 @@ public class stateBoard : State
             {
                 if (checkTileRange(-3))
                 {
-                    resetColor(selectedTile);
+                    var selectTemp = selectedTile;
+                    resetColor();
                     selectedTile -= 3;
+                    getNextColor(selectTemp);
                 }
             } else if (Input.GetKeyDown(KeyCode.DownArrow))
             {
                 if (checkTileRange(+3))
                 {
-                    resetColor(selectedTile);
+                    var selectTemp = selectedTile;
+                    resetColor();
                     selectedTile += 3;
+                    getNextColor(selectTemp);
                 }
             }
 
@@ -71,15 +83,19 @@ public class stateBoard : State
             {
                 if (checkSidewaysRange(-1) && checkTileRange(-1))
                 {
-                    resetColor(selectedTile);
+                    var selectTemp = selectedTile;
+                    resetColor();
                     selectedTile -= 1;
+                    getNextColor(selectTemp);
                 }
             } else if (Input.GetKeyDown(KeyCode.RightArrow))
             {
                 if (checkSidewaysRange(1) && checkTileRange(1))
                 {
-                    resetColor(selectedTile);
+                    var selectTemp = selectedTile;
+                    resetColor();
                     selectedTile += 1;
+                    getNextColor(selectTemp);
                 }
             }
             
@@ -97,15 +113,19 @@ public class stateBoard : State
             {
                 if (checkTileRange(-3))
                 {
-                    resetColor(selectedTile);
+                    var selectTemp = selectedTile;
+                    resetColor();
                     selectedTile -= 3;
+                    getNextColor(selectTemp);
                 }
             } else if (Input.GetKeyDown(KeyCode.S))
             {
                 if (checkTileRange(3))
                 {
-                    resetColor(selectedTile);
+                    var selectTemp = selectedTile;
+                    resetColor();
                     selectedTile += 3;
+                    getNextColor(selectTemp);
                 }
             }
 
@@ -113,15 +133,19 @@ public class stateBoard : State
             {
                 if (checkSidewaysRange(-1) && checkTileRange(-1))
                 {
-                    resetColor(selectedTile);
+                    var selectTemp = selectedTile;
+                    resetColor();
                     selectedTile -= 1;
+                    getNextColor(selectTemp);
                 }
             } else if (Input.GetKeyDown(KeyCode.D))
             {
                 if (checkSidewaysRange(1) && checkTileRange(1))
                 {
-                    resetColor(selectedTile);
+                    var selectTemp = selectedTile;
+                    resetColor();
                     selectedTile += 1;
+                    getNextColor(selectTemp);
                 }
             }
             
@@ -180,9 +204,15 @@ public class stateBoard : State
         }
     }
 
-    public bool resetColor(int selected) // put before changing selectedTile EVERY TIME
+    // goes before the selected square moves, (before reset color every time, so color can be changed back after
+    public void getNextColor(int next)
     {
-        managerSingleton.Instance.tiles[selectedTile].gameObject.GetComponent<SpriteRenderer>().color = Color.white;
+        prevColor = managerSingleton.Instance.tiles[selectedTile].gameObject.GetComponent<SpriteRenderer>().color;
+    }
+
+    public bool resetColor() // put after changing selectedTile EVERY TIME
+    {
+        managerSingleton.Instance.tiles[selectedTile].gameObject.GetComponent<SpriteRenderer>().color = prevColor;
         return true;
     }
 }
