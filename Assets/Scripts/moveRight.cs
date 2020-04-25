@@ -6,13 +6,13 @@ public class moveRight : MonoBehaviour
 {
     private float speed;
     
-    // TODO: IMPLEMENT
+    // TODO: IMPLEMENT speed up as time passes
     private float speedModifier = 1;
     
     // Start is called before the first frame update
     void Start()
     {
-        speed = (.1f);
+        speed = (.12f);
     }
 
     // Update is called once per frame

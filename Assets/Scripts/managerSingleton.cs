@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+[RequireComponent(typeof(AudioSource))]
 public class managerSingleton : Singleton<managerSingleton>
 {
     private string name = "manager singleton";
@@ -18,9 +19,17 @@ public class managerSingleton : Singleton<managerSingleton>
 
     public Color32 p1Color;
     public Color32 p2Color;
+
+    [Header("sounds")]
+    private AudioSource source;
+    public AudioClip winClip;
+    public AudioClip tileClip;
+    public AudioClip countdownClip;
+    private int countdownStartPitchModifier = 2;
     
     void Start()
     {
+        source = GetComponent<AudioSource>();
         gameObject.name = "manager";
         p1Color = new Color32(255, 136, 136, 255);
         p2Color = new Color32(120, 229, 220, 255);
@@ -28,7 +37,20 @@ public class managerSingleton : Singleton<managerSingleton>
 
     void Update()
     {
+        // get audio clips at start
         var currentScene = SceneManager.GetActiveScene().buildIndex;
+
+        if (winClip == null || tileClip == null || countdownClip == null && currentScene == 0)
+        {
+            var audioClipsToLoad = GameObject.Find("audioHolder").GetComponent<audioHolder>().audioClipsToLoad;
+            tileClip = audioClipsToLoad[0];
+            countdownClip = audioClipsToLoad[1];
+            winClip = audioClipsToLoad[2];
+            Destroy(GameObject.Find("audioHolder"));
+            Debug.Log("sounds found");
+        }
+        
+        // get info for adding tile when game is won
         
         if (currentSquare == 0 && currentScene >= 2 && currentScene <= 10)
         {
@@ -187,5 +209,10 @@ public class managerSingleton : Singleton<managerSingleton>
         {
             Debug.Log("error adding tile");
         }
+    }
+
+    public void playSound(AudioClip audioClip)
+    {
+        source.PlayOneShot(audioClip);
     }
 }
